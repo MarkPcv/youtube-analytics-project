@@ -23,22 +23,27 @@ class Channel:
         Дальше все данные будут подтягиваться по API.
         """
         # Retrieve information about channel as JSON object
-        channel = Channel.youtube.channels(). \
+        self.channel = Channel.youtube.channels(). \
             list(id=channel_id, part='snippet,statistics').execute()
         # Retrieve channel id
         self.__channel_id = channel_id
         # Retrieve channel title
-        self.title = channel['items'][0]['snippet']['title']
+        self.title = self. \
+            channel['items'][0]['snippet']['title']
         # Retrieve channel description
-        self.description = channel['items'][0]['snippet']['description']
+        self.description = self. \
+            channel['items'][0]['snippet']['description']
         # Retrieve channel URL
         self.url = "https://www.youtube.com/channel/" + channel_id
         # Retrieve number of subscribers
-        self.subs_count = channel['items'][0]['statistics']['subscriberCount']
+        self.subs_count = self. \
+            channel['items'][0]['statistics']['subscriberCount']
         # Retrieve total number of videos
-        self.video_count = channel['items'][0]['statistics']['videoCount']
+        self.video_count = self. \
+            channel['items'][0]['statistics']['videoCount']
         # Retrieve total number of videos
-        self.view_count = channel['items'][0]['statistics']['viewCount']
+        self.view_count = self. \
+            channel['items'][0]['statistics']['viewCount']
 
     def print_info(self) -> None:
         """Return dictionary in json-like comfortable format with indents"""
