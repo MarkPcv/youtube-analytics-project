@@ -45,14 +45,12 @@ class Channel:
         self.view_count = self. \
             channel['items'][0]['statistics']['viewCount']
 
-
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Provides a string representation of class object for user such as:
         channel
         """
         return f"{self.title} ({self.url})"
-
 
     def print_info(self) -> None:
         """Return dictionary in json-like comfortable format with indents"""
@@ -80,3 +78,48 @@ class Channel:
                 'view_count': self.view_count
             }
             json.dump(dict_, file, ensure_ascii=False)
+
+    def __add__(self, other) -> int:
+        """
+        Returns the summation of the subscribers of two channels
+        """
+        return int(self.subs_count) + int(other.subs_count)
+
+    def __sub__(self,other) -> int:
+        """
+        Returns the subtraction the number of subscribers of other channel
+        from this channel
+        """
+        return int(self.subs_count) - int(other.subs_count)
+
+    def __eq__(self,other) -> bool:
+        """
+        Checks if numbers of subscribers between two channels are equal
+        """
+        return self.subs_count == other.subs_count
+
+    def __lt__(self,other) -> bool:
+        """
+        Checks if number of subscribers of this channel is less than other
+        """
+        return int(self.subs_count) < int(other.subs_count)
+
+    def __le__(self,other) -> bool:
+        """
+        Checks if number of subscribers of this channel is less than other
+        or equal
+        """
+        return int(self.subs_count) <= int(other.subs_count)
+
+    def __gt__(self,other) -> bool:
+        """
+        Checks if number of subscribers of this channel is more than other
+        """
+        return int(self.subs_count) > int(other.subs_count)
+
+    def __ge__(self,other) -> bool:
+        """
+        Checks if number of subscribers of this channel is more than other
+        or equal
+        """
+        return int(self.subs_count) >= int(other.subs_count)
