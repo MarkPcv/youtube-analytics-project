@@ -45,6 +45,15 @@ class Channel:
         self.view_count = self. \
             channel['items'][0]['statistics']['viewCount']
 
+
+    def __str__(self):
+        """
+        Provides a string representation of class object for user such as:
+        channel
+        """
+        return f"{self.title} ({self.url})"
+
+
     def print_info(self) -> None:
         """Return dictionary in json-like comfortable format with indents"""
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
