@@ -41,7 +41,7 @@ class Channel:
         # Retrieve total number of videos
         self.video_count = self. \
             channel['items'][0]['statistics']['videoCount']
-        # Retrieve total number of videos
+        # Retrieve total number of views
         self.view_count = self. \
             channel['items'][0]['statistics']['viewCount']
 
