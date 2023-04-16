@@ -31,6 +31,24 @@ class Video:
         self.like_count = self. \
             video['items'][0]['statistics']['likeCount']
 
+    def __str__(self):
+        """
+        Provides a string representation of class object for user such as:
+        video title
+        """
+        return f"{self.title}"
+
     def print_info(self):
         """Return dictionary in json-like comfortable format with indents"""
         print(json.dumps(self.video, indent=2, ensure_ascii=False))
+
+
+class PLVideo(Video):
+    def __init__(self, video_id: str, playlist_id: str) -> None:
+        """
+        Initialization of PLVideo class instance
+        """
+        # Use initialization of parent class
+        super().__init__(video_id)
+        # Declare new attributes
+        self.playlist_id = playlist_id
