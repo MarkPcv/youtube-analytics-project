@@ -23,7 +23,7 @@ class Video:
                 id=video_id).execute()
             # Check if video exists
             if not self.video['items']:
-                raise Exception('Video not found')
+                raise Exception
             # Retrieve video title
             self.title = self. \
                 video['items'][0]['snippet']['title']
@@ -36,6 +36,7 @@ class Video:
             self.like_count = self. \
                 video['items'][0]['statistics']['likeCount']
         except Exception:
+            print(Exception(f'Video is not found with id = {video_id}'))
             self.title = None
             self.url = None
             self.view_count = None
