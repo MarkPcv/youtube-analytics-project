@@ -1,7 +1,7 @@
 import json
 import os
 
-import googleapiclient.discovery
+
 from googleapiclient.discovery import build
 
 
@@ -16,20 +16,31 @@ class Video:
         Initialization of Video class instance
         """
         self.video_id = video_id
-        self.video = Video.youtube.videos().list(part='snippet,statistics,'
-                                                'contentDetails,topicDetails',
-                                           id=video_id).execute()
-        # Retrieve video title
-        self.title = self. \
-            video['items'][0]['snippet']['title']
-        # Retrieve video URL
-        self.url = "https://www.youtube.com/watch?v=" + video_id
-        # Retrieve number of views
-        self.view_count = self. \
-            video['items'][0]['statistics']['viewCount']
-        # Retrieve number of likes
-        self.like_count = self. \
-            video['items'][0]['statistics']['likeCount']
+        try:
+            self.video = Video.youtube.videos().list(
+                part='snippet,statistics,'
+                'contentDetails,topicDetails',
+                id=video_id).execute()
+            # Check if video exists
+            if not self.video['items']:
+                raise Exception('Video not found')
+            # Retrieve video title
+            self.title = self. \
+                video['items'][0]['snippet']['title']
+            # Retrieve video URL
+            self.url = "https://www.youtube.com/watch?v=" + video_id
+            # Retrieve number of views
+            self.view_count = self. \
+                video['items'][0]['statistics']['viewCount']
+            # Retrieve number of likes
+            self.like_count = self. \
+                video['items'][0]['statistics']['likeCount']
+        except Exception:
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
+
 
     def __str__(self):
         """
